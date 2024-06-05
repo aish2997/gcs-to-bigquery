@@ -1,11 +1,11 @@
 ########## COMMON INPUTS ############
 main = {
-  project = "assessment-project-425415"
+  project = ""
   region  = "europe-west1"
   env     = "dev"
 }
 
-project_id = "assessment-project-425415"
+project_id = ""
 region     = "europe-west1"
 
 ########## GCP WORKFLOWS VARIABLES ############
