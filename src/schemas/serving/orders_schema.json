@@ -1,0 +1,72 @@
+[
+  {
+    "name": "orderId",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": ""
+  },
+  {
+    "name": "productId",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": ""
+  },
+  {
+    "name": "currency",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": ""
+  },
+  {
+    "name": "quantity",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": ""
+  },
+  {
+    "name": "shippingCost",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": ""
+  },
+  {
+    "name": "amount",
+    "type": "FLOAT",
+    "mode": "NULLABLE",
+    "description": ""
+  },
+  {
+    "name": "channel",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": ""
+  },
+  {
+    "name": "channelGroup",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": ""
+  },
+  {
+    "name": "campaign",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": ""
+  },
+  {
+    "name": "dateTime",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": ""
+  },
+  {
+    "name": "serving_ingestion_time",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "orders_rk",
+    "mode": "REQUIRED",
+    "type": "BYTES"
+  }
+]

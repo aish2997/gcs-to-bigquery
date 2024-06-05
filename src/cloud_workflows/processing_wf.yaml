@@ -1,0 +1,28 @@
+- declare:
+    assign:
+        - resultsList: []
+
+- insertAutoDetect:
+    call: googleapis.bigquery.v2.jobs.insert
+    args:
+        projectId: ${project}
+        body:
+            configuration:
+                load:
+                    autodetect: true
+                    destinationTable:
+                        datasetId: "assessment_stg"
+                        projectId: ${project}
+                        tableId: "${integration}_hst_v01"
+                    fieldDelimiter: ","
+                    skipLeadingRows: 1
+                    sourceFormat: "csv"
+                    sourceUris: "gs://bucket-incoming-d/${integration}.csv"
+                    writeDisposition: "WRITE_TRUNCATE"
+    result: insertAutoDetectResult
+- appendInsertAutoDetectResult:
+    assign:
+      - resultsList: '$${list.concat(resultsList, insertAutoDetectResult.status.state + " for " + insertAutoDetectResult.configuration.load.destinationTable.tableId)}'
+
+- returnOutput:
+    return: $${resultsList}

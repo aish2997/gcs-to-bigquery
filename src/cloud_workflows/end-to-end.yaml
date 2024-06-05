@@ -1,0 +1,44 @@
+main:
+  steps:
+    - inventory_wf:
+        call: googleapis.workflowexecutions.v1beta.projects.locations.workflows.executions.create
+        args:
+          parent: projects/${project_id}/locations/europe-west1/workflows/wf-inventory
+          body:
+            argument: ""
+        result: first_workflow_result
+    - orders_wf:
+        call: googleapis.workflowexecutions.v1beta.projects.locations.workflows.executions.create
+        args:
+          parent: projects/${project_id}/locations/europe-west1/workflows/wf-orders
+          body:
+            argument: ""
+        result: second_workflow_result
+    - execute-serving-query1:
+        steps:
+          - initializeVariables:
+              assign:
+                - now_plus_10s: ${time.format(sys.now() + 1)}
+          - start_run:
+                  call: googleapis.bigquerydatatransfer.v1.projects.locations.transferConfigs.startManualRuns
+                  args:
+                      parent: projects/325793067403/locations/europe-west1/transferConfigs/665f793e-0000-261c-b988-089e082101d0
+                      body:
+                        requestedRunTime: ${now_plus_10s}
+                  result: runsResp
+    - execute-serving-query2:
+        steps:
+          - initializeVariables2:
+              assign:
+                - now_plus_10s2: ${time.format(sys.now() + 1)}
+          - start_run2:
+                  call: googleapis.bigquerydatatransfer.v1.projects.locations.transferConfigs.startManualRuns
+                  args:
+                      parent: projects/325793067403/locations/europe-west1/transferConfigs/665f7dfe-0000-2844-a9d6-14223bbb1072
+                      body:
+                        requestedRunTime: ${now_plus_10s2}
+                  result: runsResp
+    - step3:
+        return:
+          first_workflow_output: ${first_workflow_result}
+          second_workflow_output: ${second_workflow_result}
